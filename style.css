@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
 :root {
-    --success-color: green;
+    --success-color: rgb(82, 255, 82);
     --error-color: red;
 }
 
