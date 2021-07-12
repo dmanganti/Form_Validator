@@ -24,38 +24,29 @@ function isValidEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
+function checkRequired(inputArr) {
+    inputArr.forEach(function(input) {
+        if(input.value.trim() === '') {
+            showError(input, `${getFieldName(input)} is required`);
+            if(input === password2) {
+                showError(input, 'Must confirm password')
+            }
+        } else {
+            showSuccess(input)
+        }
+    });
+}
+
+// Get fieldname
+function getFieldName(input) {
+    return input.id.charAt(0).toUpperCase() + input.id.slice(1);
+}
 
 // Event Listeners
 form.addEventListener('submit', function(e) {
     e.preventDefault();
 
-    if(username.value === '') {
-        showError(username, 'Username is required');
-    } else {
-        showSuccess(username);
-    }
+    checkRequired([username, email, password, password2]);
 
-    if(email.value === '') {
-        showError(email, 'Email is required');
-    } else if(!isValidEmail(email.value)) {
-        showError(email, 'Email is not valid');
-    }else {
-        showSuccess(email);
-    }
-
-    if(password.value === '') {
-        showError(password, 'Password is required');
-    } else if(password.length < 8) {
-        showError(password, 'Password must be atleast 8 characters');
-    } else {
-        showSuccess(password);
-    }
-
-    if(password2.value === '') {
-        showError(password2, 'Passwords is required');
-    } else if (password2.value != password.value) {
-        showError(password2, 'Passwords do not match');
-    } else {
-        showSuccess(password2);
-    }
 });
+
